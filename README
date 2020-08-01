@@ -1,0 +1,18 @@
+Context of the Directory:
+    This directory was made for the DonorsChoose kaggle project where the goal is
+    to determine the approval of a funding proposal from various teachers to the
+    DonorsChoose Organization. The text analysis fields and their data analysis are
+    used to predict approval of various projects for funding.
+
+    The used data-frame (containing all relevant essays to be analyzed) can be found
+    on Kaggle for the DonorsChoose project.
+    (used as data_train in text_analysis_fields.py)
+
+    Data frames can be changed as deemed necessary for various purposes
+    Text-analysis fields  are, in part, courtesy of Attreya Bhatt (also has GitHub)
+        - https://github.com/attreyabhatt/Sentiment-Analysis
+
+This directory focuses on:
+    - providing functions for basic text analysis using the NLTK library
+    - initializing a new data frame with determined fields from text analysis
+    - analyzing new data with decision trees

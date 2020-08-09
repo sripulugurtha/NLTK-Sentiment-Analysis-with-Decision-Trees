@@ -15,4 +15,5 @@ Context of the Directory:
 This directory focuses on:
     - providing functions for basic text analysis using the NLTK library
     - initializing a new data frame with determined fields from text analysis
-    - analyzing new data with decision trees
+    - analyzing new data with decision trees and random forests
+    - analyzing balanced/resitributed data

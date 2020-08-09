@@ -5,7 +5,6 @@ from sklearn import metrics  # Import scikit-learn metrics module for accuracy c
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
-
 # open up the console to large limits
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
@@ -19,7 +18,8 @@ col_names = ["essay_2_emotion", "essay_2_sentiment", "essay_2_verb_ind",
              "project_is_approved"]
 
 # imported data from text_analysis_fields file (at the end, data --> csv)
-df = pd.read_csv('C:/Users/Sri/Desktop/balanced_train.csv', header=None, low_memory=False, names=col_names, skiprows=[0])
+df = pd.read_csv('C:/Users/Sri/Desktop/balanced_train.csv', header=None, low_memory=False, names=col_names,
+                 skiprows=[0])
 
 
 # usable data; no errors when processing
@@ -44,7 +44,7 @@ def tree_accuracy(nodes, train):
     X = df[feature_cols1]
     y = df.project_is_approved
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=nodes/100, random_state=1)
-    clf = DecisionTreeClassifier(criterion="gini", min_samples_leaf=12500, max_depth=20, min_samples_split=nodes)
+    clf = DecisionTreeClassifier()
     clf = clf.fit(X_train, y_train)  # train the tree
     # return training accuracies
     if train:
@@ -56,20 +56,17 @@ def tree_accuracy(nodes, train):
         pred = clf.predict(X_test)
         return metrics.accuracy_score(y_test, pred)
 
-
+#
 # training and validation accuracy data; for LEARNING CURVE
 # change data vals as deemed necessary to plot different features
 clf_data = pd.DataFrame(
-    [i, tree_accuracy(i, True)] for i in range(2, 10))
+    [i, tree_accuracy(i, True)] for i in range(1, 100))
 clf_data_val = pd.DataFrame(
-    [i, tree_accuracy(i, False)] for i in range(2, 10))
-
+    [i, tree_accuracy(i, False)] for i in range(1, 100))
 
 # Plot curves; change as deemed necessary
 plt.plot(clf_data[0], clf_data[1], label="Training")
 plt.plot(clf_data_val[0], clf_data_val[1], label="Validation")
 plt.legend(loc='best')
-plt.title("Decision Tree Accuracy based on min-samples-split")
-plt.xlabel('min-samples-split')
-plt.ylabel('Decision Tree Accuracy (percentage)')
+plt.title("Tree Accuracies based on training data size\n(50-50 approved and non-approved)")
 plt.show()
